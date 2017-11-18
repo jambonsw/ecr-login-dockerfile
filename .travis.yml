@@ -1,0 +1,14 @@
+branches:
+  only:
+  - development
+dist: trusty
+sudo: required
+language: c
+services:
+- docker
+install:
+- make build
+script:
+- $(docker run --rm --env AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID --env AWS_REGION=us-west-2 --env AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY jambonrose/ecr-login)
+after_success:
+- if [ "$TRAVIS_PULL_REQUEST" == 'false' ] && [ "$TRAVIS_BRANCH" == 'development' ]; then make push; else echo 'Skipping Image Push'; fi;
