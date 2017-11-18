@@ -9,4 +9,4 @@ services:
 install:
 - make build
 script:
-- $(docker run --rm --env AWS_ACCESS_KEY_ID=wrong --env AWS_REGION=us-west-2 --env AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY jambonrose/ecr-login)
+- $(docker run --rm --env AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID --env AWS_REGION=us-west-2 --env AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY jambonrose/ecr-login)
